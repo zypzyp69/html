@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <style>
+    body {
+      font-family: 'Helvetica';
+      padding: 60px;
+      text-align: left;
+      background:#ffc8f8 ;
+      color:rgb(238, 238, 238);
+      
+    }
+    head {
+      background-size: cover;
+    }
+    .container{
+    max-width: 1000px;
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    padding: 5rem;
+    background-color: rgb(174, 255, 189);
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    }
+    .form-group {
+      background: rgb(161, 178, 255);
+      font-weight: 100;
+      font-size: 20px;
+      display: block;
+      margin-bottom: -0.8rem;
+    }
+  </style>
+  <!--<img src="https://scontent.xx.fbcdn.net/v/t1.15752-9/429850425_1520912568453839_984323928217604654_n.jpg?stp=dst-jpg_p206x206&_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeFi7zIPN_vLyys_f-8KZCvF77CObMbrX6DvsI5sxutfoKzka5D5v_vMpxbW0wc2mWVxc9BqBtgoumNsHLz3ZHeS&_nc_ohc=oR932E9g3WAAX_s9ONE&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdS1dDy4upko-QaEGUenmZucQuNM1ifTikzbfmu2rDoICg&oe=6613F6D4" alt="error">-->
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <form id="add-item">
+          <div class="form-group mt-4">
+            <label for="exampleInputEmail1">Add a title!</label>
+            <input type="text" class="form-control" placeholder="Give a title" id="input-field">
+          </div>
+          <div class="form-group mt-4">
+            <label for="exampleInputEmail1">Add a body content</label>
+            <textarea class="form-control" placeholder="Type something" id="textarea-field"></textarea>
+          </div>
+          <div class="col float-end mt-4">
+            <button type="submit" class="btn btn-primary">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="card-container" class="row mt-4">
+      <!-- Existing cards will be added here -->
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('add-item');
+      const cardContainer = document.getElementById('card-container');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Retrieve values from input fields
+        const title = document.getElementById('input-field').value;
+        const content = document.getElementById('textarea-field').value;
+
+        // Create card element
+        const card = document.createElement('div');
+        card.classList.add('col-md-12');
+        card.innerHTML = `
+          <div class="card mt-4">
+            <div class="card-header">
+              <h2>${title}</h2>
+            </div>
+            <div class="card-body">
+              <p>${content}</p>
+              <button class="btn btn-danger float-end delete-btn">Delete</button>
+            </div>
+          </div>
+        `;
+
+        // Append card to container
+        cardContainer.appendChild(card);
+
+        // Clear input fields
+        document.getElementById('input-field').value = '';
+        document.getElementById('textarea-field').value = '';
+
+        // Attach event listener to delete button
+        const deleteButton = card.querySelector('.delete-btn');
+        deleteButton.addEventListener('click', function () {
+          card.remove();
+        });
+      });
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>
